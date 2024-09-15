@@ -1,0 +1,6 @@
+ls,"List files and directories."
+cd,"Change directory."
+pwd,"Print current working directory."
+mkdir,"Create a new directory."
+cp,"Copy files and directories."
+mv,"Move/rename files and directories."
