@@ -132,7 +132,7 @@ void writeAllCommands(LinkedList<std::string, std::string> commandList);
 void readAllCommands(LinkedList<std::string, std::string>* commandList) {
 
 	std::ifstream readFile;
-	readFile.open("~/CPTS223_assignments/cpts223PA1/commands.csv");
+	readFile.open("../commands.csv");
 
 	std::string line;
 
@@ -165,7 +165,7 @@ void readAllCommands(LinkedList<std::string, std::string>* commandList) {
 void writeAllCommands(LinkedList<std::string, std::string> commandList) {
 
 	std::ofstream writeFile;
-	writeFile.open("~/CPTS223_assignments/cpts223PA1/commands.csv");
+	writeFile.open("../commands.csv");
 
 	Node<std::string, std::string>* tempHead = commandList.getHeadPtr();
 
