@@ -21,7 +21,7 @@ int main()
     Array<std::string, int> players;
     readAllPlayers(&players);
 
-    clearScreen();
+    std::cout << "================================= The Game ===================================" << std::endl;
 
     while (true)
     {
@@ -43,22 +43,21 @@ int main()
             {
                 case 1: // Game Rules
                 {
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
                     std::cout << "================================= Game Rule ===================================" << std::endl;
                     std::cout << "To play the game, select \"2\" where you will be prompted for your name and number of questions.\n";
                     std::cout << "Each question presents a specific Linux command where you will be able to choose from 3 different options. Each correct answer yields a point.\n";
                     std::cout << "You can also add and delete commands as needed.\n";
                     std::cout << "================================= Game Rule ===================================" << std::endl << std::endl;
 
-                    system("pause");
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
 
                     break;
                 }
 
                 case 2: case 3: // 2. Play Game; 3. Load Previous Game
                 {
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
                     
                     std::cout << "Please enter your username: ";
                     std::cin >> userName;
@@ -88,8 +87,7 @@ int main()
                         }
                         else std::cout << "No matching username was found. A new profile will be created after the game concludes." << std::endl;
 
-                        system("pause");
-                        clearScreen();
+                        std::cout << "================================= The Game ===================================" << std::endl;
 
                     }
 
@@ -120,7 +118,7 @@ int main()
 
                     }
                    
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
 
                     int numberList[30] = { 0 };
 
@@ -252,8 +250,7 @@ int main()
 
                         std::cout << "Your point total is now -> " << points << std::endl;
 
-                        system("pause");
-                        clearScreen();
+                        std::cout << "================================= The Game ===================================" << std::endl;
                     }
 
                     std::cout << "Session completed. Going back to main menu." << std::endl;
@@ -281,15 +278,14 @@ int main()
 
                     }
 
-                    system("pause");
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
 
                     break;
                 }
 
                 case 4: // Add Command
                 {
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
                     std::cout << "To add a command to the library, please enter the command name that you would like add: ";
                     std::cin >> newCommandToAdd;
 
@@ -332,15 +328,14 @@ int main()
                         
                     }
 
-                    system("pause");
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
 
                     break;
                 }
 
                 case 5: // Remove Command
                 {
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
                     std::cout << "Please enter the name of the command that you would like remove: ";
                     std::cin >> oldCommandTodelete;
                     
@@ -370,8 +365,7 @@ int main()
 
                     }
 
-                    system("pause");
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
 
                     break;
                 }
@@ -379,7 +373,7 @@ int main()
                 case 6: // Exit
                 {
 
-                    clearScreen();
+                    std::cout << "================================= The Game ===================================" << std::endl;
                     std::cout << "Exiting the program..." << std::endl;
 
                     writeAllCommands(commands);

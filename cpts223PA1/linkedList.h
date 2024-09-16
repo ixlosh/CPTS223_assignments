@@ -126,16 +126,9 @@ private:
 
 };
 
-void clearScreen();
 void readAllCommands(LinkedList<std::string, std::string>* commandList);
 void writeAllCommands(LinkedList<std::string, std::string> commandList);
 
-void clearScreen() {
-
-	system("cls");
-	std::cout << "================================= The Game ===================================" << std::endl;
-
-}
 void readAllCommands(LinkedList<std::string, std::string>* commandList) {
 
 	std::ifstream readFile;
