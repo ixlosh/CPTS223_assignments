@@ -1,7 +1,14 @@
 /*
 ADVANTAGES/DISADVANTAGES LINKED LIST
-
+Advantage-> Using linked list with storing commands allow infinite number of commands to be stored, if we were to use
+arrays for this then we would have to allocate a fixed number of space for it before running.
+Disadvantage-> Because a singly linked list can only traverse forwards, we sometimes have to go all the way back
+and start from the start to go back one step -this happens when we try to remove a link in the middle of the list.
 ADVANTAGES/DISADVANTAGES ARRAY
+Advantage-> Because at any point accessing an element in an array is easy, they are much lighter on the workload of
+computing unit.
+Disadvantage-> Even though elements are easier to access, limit of such elements are defined before runtime, thus 
+if too much information is loaded onto an array, overflow might happen -some data might possibly be lost-.
 */
 
 #include "array.h"
