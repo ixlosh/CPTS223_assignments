@@ -56,7 +56,7 @@ void writeAllPlayers(Array<std::string, int> playerList);
 void readAllPlayers(Array<std::string, int>* playerList) {
 
 	std::ifstream readFile;
-	readFile.open("~/CPTS223_assignments/cpts223PA1/profiles.csv");
+	readFile.open("../profiles.csv");
 
 	std::string line;
 
@@ -88,7 +88,7 @@ void readAllPlayers(Array<std::string, int>* playerList) {
 void writeAllPlayers(Array<std::string, int> playerList) {
 
 	std::ofstream writeFile;
-	writeFile.open("~/CPTS223_assignments/cpts223PA1/profiles.csv");
+	writeFile.open("../profiles.csv");
 
 	for (int i = 0; i < playerList.accessPosition(); i++) {
 
