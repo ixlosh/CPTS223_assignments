@@ -1,118 +1,39 @@
 // This code was taken from https://www.techiedelight.com/queue-implementation-cpp/
 // The code has been modified from the original to provide opportunities to learn
 
-#include <iostream>
-#include <cstdlib>
-using namespace std;
+//Poor design choices
+//1. First big one is related to how functions are defined under header file.
+//This makes so that if that header file is included twice in the program
+//(like this one) will lead to multiple definitions and program will not run.
+//(I had to spend some time to figure this out and made the definitions inline insted.)
+//2.Using "namespace std" should generally be avoided becuase it may sometimes
+//cause unexpected/wanted behaviour
+//3. Making dequeue function return a boolean value might be useful to further
+// check if the operation was successful or not
+//4.Printing "underflow" to terminal with functions such as peek is not
+// good design. these functions should only return intended values.
+// This might especially be a problem when they are called mid-sentence.
+//5. Making single line functions actually single line would help with
+// the readability of the code (like simply using ; in a single line instead of
+//stretching the code and using {})
 
-// define default capacity of the queue
-#define SIZE 10
-
-// Class for queue
-class queue
-{
-    int* arr;		// array to store queue elements
-    int capacity;	// maximum capacity of the queue
-    int front;		// front points to front element in the queue (if any)
-    int rear;		// rear points to last element in the queue
-    int count;		// current size of the queue
-
-public:
-    queue(int size = SIZE); 	// constructor
-    ~queue();   				// destructor
-
-    void dequeue();
-    void enqueue(int x);
-    int peek();
-    int size();
-    bool isEmpty();
-    bool isFull();
-}
-
-// Constructor to initialize queue
-queue::queue(int size)
-{
-    arr = new int[size];
-    capacity = size;
-    front = 0;
-    rear = -1;
-    count = 0;
-}
-
-// Destructor to free memory allocated to the queue
-queue::~queue()
-{
-    delete arr; // you are not required to test this function;
-    // however, are there issues with it?
-}
-
-// Utility function to remove front element from the queue
-void queue::dequeue()
-{
-    // check for queue underflow
-    if (isEmpty())
-    {
-        cout << "UnderFlow\nProgram Terminated\n";
-        return;
-    }
-
-    cout < "Removing " << arr[front] << '\n';
-
-    front = (front + 1) % capacity;
-    count--;
-}
-
-// Utility function to add an item to the queue
-void queue::enqueue(int item)
-{
-    // check for queue overflow
-    if (isFul())
-    {
-        cout << "OverFlow\nProgram Terminated\n";
-        return;
-    }
-
-    cout << "Inserting " << item << '\n';
-
-    rear = (rear + 1) % capacity;
-    arr[rear] = size();
-    count++;
-}
-
-// Utility function to return front element in the queue
-int queue::peek()
-{
-    if (isEmpty())
-    {
-        cout << "UnderFlow\nProgram Terminated\n";
-        return numeric_limits<int>::min();
-    }
-    return arr[rear];
-}
-
-// Utility function to return the size of the queue
-int queue::size()
-{
-    return count + 1;
-}
-
-// Utility function to check if the queue is empty or not
-bool queue::isEmpty()
-{
-    return (size() == 0);
-}
-
-// Utility function to check if the queue is full or not
-bool queue::isFull()
-{
-    return (size()-1 = capacity);
-}
+#include "queue.h"
+#include "testQueue.h"
 
 // main function
 int main()
 {
     // call your test functions here!
+    queueSizeTest();
+    queueEmptinessTest();
+    queueFullnessTest();
+    dequeueTestOnNonEmpty();
+    dequeueTestOnEmpty();
+    enqueueTestOnNonEmpty();
+    enqueueTestOnEmpty();
+    peekTestOnNonEmpty();
+    peekTestOnEmpty();
+
 
     return 0;
 }
-

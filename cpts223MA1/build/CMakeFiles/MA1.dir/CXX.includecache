@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/workspaces/CPTS223_assignments/cpts223MA1/main.cpp
+queue.h
+/workspaces/CPTS223_assignments/cpts223MA1/queue.h
+testQueue.h
+/workspaces/CPTS223_assignments/cpts223MA1/testQueue.h
+
+/workspaces/CPTS223_assignments/cpts223MA1/queue.h
+iostream
+-
+cstdlib
+-
+limits
+-
+
+/workspaces/CPTS223_assignments/cpts223MA1/testQueue.cpp
+queue.h
+/workspaces/CPTS223_assignments/cpts223MA1/queue.h
+testQueue.h
+/workspaces/CPTS223_assignments/cpts223MA1/testQueue.h
+
+/workspaces/CPTS223_assignments/cpts223MA1/testQueue.h
+
