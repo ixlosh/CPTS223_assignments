@@ -48,6 +48,12 @@ private:
 	BinaryNode * findMin( BinaryNode * t ) const;
 	BinaryNode * findMax( BinaryNode * t ) const;
 	void makeEmpty( BinaryNode * & t );
+
+	void insert( const Comparable & x, BinaryNode * & t );
+	void insert( Comparable && x, BinaryNode * & t );
+	bool contains( const Comparable & x, BinaryNode *t ) const;
+	void remove( const Comparable & x, BinaryNode * & t );
+
 };
 
 
@@ -127,21 +133,61 @@ typename BST<Comparable>::BinaryNode* BST<Comparable>::findMax(BinaryNode * t) c
 // public contains: refer to textbook, Figure 4.17, Line 4 - 7
 template<typename Comparable>
 bool BST<Comparable>::contains( const Comparable & x ) const {
-	cout << "**TODO**: contains function" << endl;
-	return false;
+	return contains(x,root);
+}
+
+//private contains
+template<typename Comparable>
+bool BST<Comparable>::contains( const Comparable & x, BinaryNode *t ) const {
+	if( t == nullptr ) return false;
+	else if( x < t->element ) return contains( x, t->left );
+	else if( t->element < x ) return contains( x, t->right );
+	else return true;
 }
 
 // public insert: refer to textbook, Figure 4.17, Line 12 - 15
 template<typename Comparable>
 void BST<Comparable>::insert(const Comparable & x) {
-	cout << "**TODO**: insert function" << endl;
+	insert(x,root);
 }
 
+//private inserts
+//insert by creating a node
+template<typename Comparable>
+void BST<Comparable>::insert( const Comparable & x, BinaryNode *&t) {
+	if( t == nullptr ) t = new BinaryNode{ x, nullptr, nullptr };
+	else if( x < t->element ) insert( x, t->left );
+	else if( t->element < x ) insert( x, t->right );
+}
+//insert by moving
+template<typename Comparable>
+void BST<Comparable>::insert( Comparable && x, BinaryNode *&t) {
+	if( t == nullptr ) t = new BinaryNode{ std::move( x ), nullptr, nullptr };
+	else if( x < t->element ) insert( std::move( x ), t->left );
+	else if( t->element < x ) insert( std::move( x ), t->right );
+}
 
 // public remove: refer to textbook, Figure 4.17, Line 20 - 23
 template<typename Comparable>
 void BST<Comparable>::remove( const Comparable & x ) {
-	cout << "**TODO**: remove function" << endl;
+	remove(x,root);
+}
+
+//private remove
+template<typename Comparable>
+void BST<Comparable>::remove( const Comparable & x, BinaryNode *&t) {
+	if( t == nullptr ) return; // Item not found; do nothing
+	if( x < t->element ) remove( x, t->left );
+	else if( t->element < x ) remove( x, t->right );
+	else if( t->left != nullptr && t->right != nullptr ) {
+	t->element = findMin( t->right )->element;
+	remove( t->element, t->right );
+	}
+	else {
+	BinaryNode *oldNode = t;
+	t = ( t->left != nullptr ) ? t->left : t->right;
+	delete oldNode;
+	}
 }
 
 // public treeSize

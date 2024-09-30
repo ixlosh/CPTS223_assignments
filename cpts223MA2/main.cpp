@@ -55,9 +55,9 @@ int main()
     bst->insert(-10);
     bst->insert(100);
 
-    // a demo for findMin and findMax if "insert" is successfully implemented
-    // cout << "(0) findMin = " << bst->findMin() << endl;
-    // cout << "    findMax = " << bst->findMax() << endl;
+    //a demo for findMin and findMax if "insert" is successfully implemented
+    cout << "(0) findMin = " << bst->findMin() << endl;
+    cout << "    findMax = " << bst->findMax() << endl;
 
     cout << "(1.1) Print BST (in-order traversal): " << endl << " ";
     bst->printInOrder();

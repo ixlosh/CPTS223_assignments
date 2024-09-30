@@ -1,9 +1,0 @@
-void queueSizeTest();
-void queueEmptinessTest();
-void queueFullnessTest();
-void dequeueTestOnNonEmpty();
-void dequeueTestOnEmpty();
-void enqueueTestOnNonEmpty();
-void enqueueTestOnEmpty();
-void peekTestOnNonEmpty();
-void peekTestOnEmpty();

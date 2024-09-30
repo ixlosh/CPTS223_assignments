@@ -1,3 +1,0 @@
-/workspaces/CPTS223_assignments/cpts223PA1/build/CMakeFiles/rebuild_cache.dir
-/workspaces/CPTS223_assignments/cpts223PA1/build/CMakeFiles/edit_cache.dir
-/workspaces/CPTS223_assignments/cpts223PA1/build/CMakeFiles/PA1.dir
