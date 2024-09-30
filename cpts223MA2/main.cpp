@@ -1,8 +1,8 @@
 /*
 Inserting the randomly generated integers into a BST generally gives a height in the order of:
 
-Your answer:
-
+Your answer: O(logn)
+As more and more numbers are injected into the tree, growth rate will slow down.
 
 */
 

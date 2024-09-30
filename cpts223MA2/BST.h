@@ -53,6 +53,9 @@ private:
 	void insert( Comparable && x, BinaryNode * & t );
 	bool contains( const Comparable & x, BinaryNode *t ) const;
 	void remove( const Comparable & x, BinaryNode * & t );
+	int treeCounter(BinaryNode * & t ) const;
+	int heightDeterminer(BinaryNode * & t) const;
+	void inOrderPrinter(BinaryNode * & t) const;
 
 };
 
@@ -193,21 +196,47 @@ void BST<Comparable>::remove( const Comparable & x, BinaryNode *&t) {
 // public treeSize
 template <typename Comparable>
 int BST<Comparable>::treeSize() const {
-	cout << "**TODO**: treeSize function" << endl;
+	treeCounter(root);
 	return 0;
+}
+
+//private treeSize (I called it treeCounter)
+template <typename Comparable>
+int BST<Comparable>::treeCounter(BinaryNode * & t ) const {
+	if (t==nullptr) return 0;
+	else return 1+treeCounter(t->left)+treeCounter(t->right);
 }
 
 // public treeHeight
 template <typename Comparable>
 int BST<Comparable>::treeHeight() const {
-	cout << "**TODO**: treeHeight function" << endl;
-	return 0;
+	heightDeterminer(root);
+}
+
+//private treeHeight (I called it heightDeterminer)
+template <typename Comparable>
+int BST<Comparable>::heightDeterminer(BinaryNode * & t ) const {
+	if (t==nullptr) return 0;
+	int leftHeight = heightDeterminer(t->left);
+	int rightHeight = heightDeterminer(t->right);
+	return (leftHeight > rightHeight) ? leftHeight+1 : rightHeight+1;
 }
 
 // public printInOrder: refer to textbook, Figure 4.60
 template<typename Comparable>
 void BST<Comparable>::printInOrder() const {
-	cout << "**TODO**: printInOrder function" << endl;
+	if (treeHeight==0) cout <<"Empty tree"<<endl;
+	else inOrderPrinter(root);
+}
+
+//private printInOrder (I called it inOrderPrinter)
+template <typename Comparable>
+void BST<Comparable>::inOrderPrinter(BinaryNode * & t) const {
+	if (t != nullptr) {
+		inOrderPrinter(t->left);
+		cout << t->element <<endl;
+		inOrderPrinter(t->right);
+	}
 }
 
 // public printLevels
