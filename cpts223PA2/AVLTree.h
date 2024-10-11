@@ -60,6 +60,10 @@ private:
     bool contains(AVLNode*ptr,const Comparable & x) const;
     void insert(AVLNode*&ptr,const Comparable & x);
     void remove(AVLNode*&ptr,const Comparable & x);
+    bool isBalanced(AVLNode*ptr) const;
+    int treeSize (AVLNode*ptr) const;
+    bool isBST(AVLNode*ptr,int valuePassed,bool isLeft) const;
+    int computeHeight(AVLNode*ptr) const;
 
 };
 
@@ -255,36 +259,71 @@ void AVLTree<Comparable>::doubleWithRightChild(AVLNode * & k3) {
 // public isBalanced
 template <class Comparable>
 bool AVLTree<Comparable>::isBalanced() const {
-    cout << "TODO: isBalanced function" << endl;
-    return false;
+    return isBalanced(root);
+}
+
+//private isBalanced
+template <class Comparable>
+bool AVLTree<Comparable>::isBalanced(AVLNode*ptr) const {
+    if (ptr==nullptr) return;
+
+    if (height(ptr->left)>height(ptr->right)+1 || height(ptr->right)>height(ptr->left)+1) return false;
+
+    return isBalanced(ptr->left) && isBalanced(ptr->right);
 }
 
 // public isBST
 template <class Comparable>
 bool AVLTree<Comparable>::isBST() const {
-    cout << "TODO: isBST function" << endl;
-    return false;
+    return isBST(root->left,root->element,true) && isBST(root->right,root->element,false);
+}
+
+// private isBST
+// this function works by passing the current value of the node and if we are going left or right
+// to the next iteration to compare. If we are going left, then the current value in the node must be lower
+// than the value passed with the function. If we are going to the right (false is passed as isLeft) then
+// the current value in the node must be higher than the value passed to satisfy BST conditions
+template <class Comparable>
+bool AVLTree<Comparable>::isBST(AVLNode*ptr,int valuePassed,bool isLeft) const {
+    if (ptr==nullptr) return true;
+
+    if (isLeft&&valuePassed<=ptr->element) return false;
+    if (!isLeft&&valuePassed>=ptr->element) return false;
+
+    return isBST(ptr->left,ptr->element,true) && isBST(ptr->right,ptr->element,false);
 }
 
 // public treeSize
 template <typename Comparable>
 int AVLTree<Comparable>::treeSize() const {
-    cout << "TODO: treeSize function" << endl;
-    return 0;
+    return treeSize(root);
+}
+
+// private treeSize
+template <typename Comparable>
+int AVLTree<Comparable>::treeSize(AVLNode*ptr) const {
+    if (ptr==nullptr) return 0;
+
+    return 1+treeSize(ptr->left)+treeSize(ptr->right);
 }
 
 // public computeHeight. See Figure 4.61 in Textbook
 template <typename Comparable>
 int AVLTree<Comparable>::computeHeight() const {
-    cout << "TODO: computeHeight function" << endl;
-    return -1;
+    return computeHeight(root);
+}
+
+// private computeHeight
+template <typename Comparable>
+int AVLTree<Comparable>::computeHeight(AVLNode*ptr) const {
+    if (ptr==nullptr) return -1;
+    else return 1+max(height(ptr->left),height(ptr->right));
 }
 
 // public readRootHeight
 template <typename Comparable>
 int AVLTree<Comparable>::readRootHeight() const {
-    cout << "TODO: readRootHeight function" << endl;
-    return -1;
+    return root->height;
 }
 
 // public averageDepth
