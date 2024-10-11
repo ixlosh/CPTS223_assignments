@@ -58,6 +58,8 @@ private:
     //my private functions
     int height(const AVLNode*ptr);
     bool contains(AVLNode*ptr,const Comparable & x) const;
+    void insert(AVLNode*&ptr,const Comparable & x);
+    void remove(AVLNode*&ptr,const Comparable & x);
 
 };
 
@@ -156,13 +158,44 @@ int AVLTree<Comparable>::height(const AVLNode*ptr) {
 // public insert: following BST, referring to textbook, Figure 4.17 and Figure 4.23
 template<typename Comparable>
 void AVLTree<Comparable>::insert(const Comparable & x) {
-    cout << "TODO: insert function" << endl;
+    insert(root,x);
+}
+
+//private insert
+template<typename Comparable>
+void AVLTree<Comparable>::insert(AVLNode*&ptr,const Comparable & x) {
+    if (ptr==nullptr) ptr = new AVLNode(x,nullptr,nullptr);
+    else if (x<ptr->element) insert(ptr->left,x);
+    else if (x>ptr->element) insert(ptr->right,x);
+    else; // item already exists in the tree
+
+    balance(ptr);
 }
 
 // public remove: refer to textbook, Figure 4.17 and Figure 4.26
 template<typename Comparable>
 void AVLTree<Comparable>::remove( const Comparable & x ) {
-    cout << "TODO: remove function" << endl;
+    remove(root,x);
+}
+
+//private remove
+template<typename Comparable>
+void AVLTree<Comparable>::remove(AVLNode*&ptr,const Comparable & x) {
+    if (ptr==nullptr) return; // no match and at the end of tree
+    
+    if (x<ptr->element) remove(ptr->left,x);
+    else if (x>ptr->element) remove (ptr->right,x);
+    else if (ptr->left!=nullptr && ptr->right!=nullptr) {
+        ptr->element=findMin(ptr->right);
+        remove(ptr->right,ptr->element);
+    }
+    else {
+        AVLNode*delNode=ptr;
+        ptr = (ptr->left != nullptr) ? ptr->left : ptr->right;
+        delete delNode;
+    }
+
+    balance(ptr);
 }
 
 // private balance: refer to textbook, Figure 4.42, Line 21 - 40
@@ -208,13 +241,15 @@ void AVLTree<Comparable>::rotateWithRightChild(AVLNode * & k2) {
 // private doubleWithLeftChild: for case 2, see textbook, Figure 4.46 (code) and Figure 4.45 (visualization)
 template<typename Comparable>
 void AVLTree<Comparable>::doubleWithLeftChild(AVLNode * & k3) {
-    cout << "TODO: doubleWithLeftChild function" << endl;
+    rotateWithRightChild(k3->left);
+    rotateWithLeftChild(k3);
 }
 
 // private doubleWithRightChild: for case 3 (the mirrored case of case 2)
 template<typename Comparable>
 void AVLTree<Comparable>::doubleWithRightChild(AVLNode * & k3) {
-    cout << "TODO: doubleWithRightChild function" << endl;
+   rotateWithLeftChild(k3->right);
+   rotateWithRightChild(k3);
 }
 
 // public isBalanced

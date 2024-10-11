@@ -8,7 +8,7 @@
         "name": "g++ - Build and debug active file",
         "type": "cppdbg",
         "request": "launch",
-        "program": "/workspaces/CPTS223_assignments/cpts223MA1/build/MA1",
+        "program": "/workspaces/CPTS223_assignments/cpts223PA2/build/PA2",
         "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
