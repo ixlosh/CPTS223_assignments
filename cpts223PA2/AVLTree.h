@@ -54,6 +54,10 @@ private:
     void rotateWithRightChild( AVLNode * & t );
     void doubleWithLeftChild( AVLNode * & t);
     void doubleWithRightChild( AVLNode * & t);
+    
+    //my private functions
+    bool contains(AVLNode*ptr,const Comparable & x) const;
+
 };
 
 // constructor
@@ -130,8 +134,16 @@ typename AVLTree<Comparable>::AVLNode* AVLTree<Comparable>::findMax(AVLNode * t)
 // public contains: follow the contains in BST, referring to textbook, Figure 4.17 and Figure 4.18
 template<typename Comparable>
 bool AVLTree<Comparable>::contains( const Comparable & x ) const {
-    cout << "TODO: contains function" << endl;
-    return false;
+    return contains(root,x);
+}
+
+//private contains
+template<typename Comparable>
+bool AVLTree<Comparable>::contains(AVLNode*ptr,const Comparable & x) const {
+    if (ptr==nullptr) return false;
+    else if (x<ptr->element) return contains(ptr->left,x); //go left if the element being searched is lower
+    else if (x>ptr->element) return contains(ptr->right,x); //go right if the element being searched is higher
+    else return true;
 }
 
 // public insert: following BST, referring to textbook, Figure 4.17 and Figure 4.23
@@ -150,7 +162,11 @@ void AVLTree<Comparable>::remove( const Comparable & x ) {
 // assume t is the node that violates the AVL condition, and we then identify which case to use (out of 4 cases)
 template<typename Comparable>
 void AVLTree<Comparable>::balance(AVLNode * & t) {
-    cout << "TODO: balance function" << endl;
+    
+
+    
+
+
 }
 
 // private rotateWithLeftChild: for case 1, referring to textbook, Figure 4.44 (code) and Figure 4.43 (visualization)
