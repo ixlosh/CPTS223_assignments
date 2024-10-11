@@ -56,6 +56,7 @@ private:
     void doubleWithRightChild( AVLNode * & t);
     
     //my private functions
+    int height(const AVLNode*ptr);
     bool contains(AVLNode*ptr,const Comparable & x) const;
 
 };
@@ -146,6 +147,12 @@ bool AVLTree<Comparable>::contains(AVLNode*ptr,const Comparable & x) const {
     else return true;
 }
 
+//private height - returns -1 when empty or height stored in the node otherwise
+template<typename Comparable>
+int AVLTree<Comparable>::height(const AVLNode*ptr) {
+    return ptr==nullptr ? -1 : ptr->height;
+}
+
 // public insert: following BST, referring to textbook, Figure 4.17 and Figure 4.23
 template<typename Comparable>
 void AVLTree<Comparable>::insert(const Comparable & x) {
@@ -162,23 +169,40 @@ void AVLTree<Comparable>::remove( const Comparable & x ) {
 // assume t is the node that violates the AVL condition, and we then identify which case to use (out of 4 cases)
 template<typename Comparable>
 void AVLTree<Comparable>::balance(AVLNode * & t) {
-    
+    if (t==nullptr) return;
 
-    
+    if (height(t->left)-height(t->right)>1) { // difference of heights between subtrees are larger than 1 (not allowed in AVL trees, a balancing action is required)
+        if (height(t->left->left)>=height(t->left->right)) rotateWithLeftChild(t);
+        else doubleWithLeftChild(t);
+    }
+    if (height(t->right)-height(t->left)>1) {
+        if (height(t->right->right)>=height(t->right->left)) rotateWithRightChild(t);
+        else doubleWithRightChild(t);
+    }
 
-
+    t->height=max(height(t->left),height(t->right))+1;
 }
 
 // private rotateWithLeftChild: for case 1, referring to textbook, Figure 4.44 (code) and Figure 4.43 (visualization)
 template<typename Comparable>
 void AVLTree<Comparable>::rotateWithLeftChild(AVLNode * & k2) {
-    cout << "TODO: rotateWithLeftChild function" << endl;
+    AVLNode*temp=k2->left;
+    k2->left=temp->right;
+    temp->right=k2;
+    k2->height=max(height(k2->left),height(k2->right))+1;
+    temp->height=max(height(temp->left),k2->height)+1;
+    k2=temp;
 }
 
 // private rotateWithRightChild: for case 4 (the mirrored case of case 1)
 template<typename Comparable>
 void AVLTree<Comparable>::rotateWithRightChild(AVLNode * & k2) {
-    cout << "TODO: rotateWithRightChild function" << endl;
+    AVLNode*temp=k2->right;
+    k2->right=temp->left;
+    temp->left=k2;
+    k2->height=max(height(k2->left),height(k2->right))+1;
+    temp->height=max(height(temp->right),k2->height)+1;
+    k2=temp;
 }
 
 // private doubleWithLeftChild: for case 2, see textbook, Figure 4.46 (code) and Figure 4.45 (visualization)
