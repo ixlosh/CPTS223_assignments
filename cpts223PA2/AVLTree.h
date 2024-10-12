@@ -21,12 +21,12 @@ public:
     void insert(const Comparable & x);
     void remove(const Comparable & x);
     int treeSize() const;
-    int computeHeight() const;
+    int computeHeight();
     int readRootHeight() const;
-    bool isBalanced() const;
+    bool isBalanced();
     bool isBST() const;
 
-    double averageDepth() const;
+    double averageDepth();
     void removeByRank(int rank);
 
     // the next line follows textbook Figure 4.42, Line 19
@@ -60,10 +60,12 @@ private:
     bool contains(AVLNode*ptr,const Comparable & x) const;
     void insert(AVLNode*&ptr,const Comparable & x);
     void remove(AVLNode*&ptr,const Comparable & x);
-    bool isBalanced(AVLNode*ptr) const;
+    bool isBalanced(AVLNode*ptr);
     int treeSize (AVLNode*ptr) const;
     bool isBST(AVLNode*ptr,int valuePassed,bool isLeft) const;
-    int computeHeight(AVLNode*ptr) const;
+    int computeHeight(AVLNode*ptr);
+    void averageDepthHelper(AVLNode*ptr,int depth,int &totalDepth, int &totalNodes);
+    int rankNodeFinder(AVLNode*ptr,int rank,int &currentRank);
 
 };
 
@@ -190,7 +192,7 @@ void AVLTree<Comparable>::remove(AVLNode*&ptr,const Comparable & x) {
     if (x<ptr->element) remove(ptr->left,x);
     else if (x>ptr->element) remove (ptr->right,x);
     else if (ptr->left!=nullptr && ptr->right!=nullptr) {
-        ptr->element=findMin(ptr->right);
+        ptr->element=findMin(ptr->right)->element;
         remove(ptr->right,ptr->element);
     }
     else {
@@ -258,14 +260,14 @@ void AVLTree<Comparable>::doubleWithRightChild(AVLNode * & k3) {
 
 // public isBalanced
 template <class Comparable>
-bool AVLTree<Comparable>::isBalanced() const {
+bool AVLTree<Comparable>::isBalanced() {
     return isBalanced(root);
 }
 
 //private isBalanced
 template <class Comparable>
-bool AVLTree<Comparable>::isBalanced(AVLNode*ptr) const {
-    if (ptr==nullptr) return;
+bool AVLTree<Comparable>::isBalanced(AVLNode*ptr) {
+    if (ptr==nullptr) return true;
 
     if (height(ptr->left)>height(ptr->right)+1 || height(ptr->right)>height(ptr->left)+1) return false;
 
@@ -309,15 +311,15 @@ int AVLTree<Comparable>::treeSize(AVLNode*ptr) const {
 
 // public computeHeight. See Figure 4.61 in Textbook
 template <typename Comparable>
-int AVLTree<Comparable>::computeHeight() const {
+int AVLTree<Comparable>::computeHeight() {
     return computeHeight(root);
 }
 
 // private computeHeight
 template <typename Comparable>
-int AVLTree<Comparable>::computeHeight(AVLNode*ptr) const {
+int AVLTree<Comparable>::computeHeight(AVLNode*ptr) {
     if (ptr==nullptr) return -1;
-    else return 1+max(height(ptr->left),height(ptr->right));
+    else return 1 + max(height(ptr->left),height(ptr->right));
 }
 
 // public readRootHeight
@@ -328,14 +330,47 @@ int AVLTree<Comparable>::readRootHeight() const {
 
 // public averageDepth
 template <typename Comparable>
-double AVLTree<Comparable>::averageDepth() const {
-    cout << "TODO: averageDepth function" << endl;
-    return 0.0;
+double AVLTree<Comparable>::averageDepth() {
+    int totalNodes=0,totalDepth=0; // number of nodes and cumulated depth over traversed nodes
+    averageDepthHelper(root,0,totalDepth,totalNodes);
+    return totalNodes != 0 ? (double)totalDepth/(double)totalNodes : 0.0;
+}
+
+// private averageDepthHelper
+template <typename Comparable>
+void AVLTree<Comparable>::averageDepthHelper(AVLNode*ptr,int depth,int &totalDepth, int &totalNodes) {
+    if (ptr==nullptr) return;
+
+    totalDepth+=depth;
+    totalNodes++;
+    averageDepthHelper(ptr->left,depth+1,totalDepth,totalNodes);
+    averageDepthHelper(ptr->right,depth+1,totalDepth,totalNodes);
 }
 
 // public removeByRank
 template <typename Comparable>
 void AVLTree<Comparable>::removeByRank(int rank) {
-    cout << "TODO: removeByRank function" << endl;
+    if (root==nullptr) return; // empty tree, cannot search
+
+    int currentRank=0;
+    Comparable removal=rankNodeFinder(root,rank,currentRank);
+    remove(removal);
 }
 
+template <typename Comparable>
+int AVLTree<Comparable>::rankNodeFinder(AVLNode*ptr,int rank,int &currentRank) {
+    if (ptr==nullptr); // empty tree, cannot search
+
+    if (ptr->left!=nullptr) {
+        Comparable n=rankNodeFinder(ptr->left,rank,currentRank);
+        if (currentRank==rank) return n;
+    }
+
+    currentRank++;
+
+    if (currentRank==rank) return ptr->element;
+
+    if (ptr->right!=nullptr) return rankNodeFinder(ptr->right,rank,currentRank);
+    
+    // at the end of tree, out of bounds for the given rank
+}
