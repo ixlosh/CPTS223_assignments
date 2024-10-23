@@ -1,8 +1,8 @@
 /*
 Inserting the randomly generated integers into a BST generally gives a height in the order of:
 
-Your answer:
-
+Your answer: O(logn)
+As more and more numbers are injected into the tree, growth rate will slow down.
 
 */
 
@@ -56,8 +56,8 @@ int main()
     bst->insert(100);
 
     //a demo for findMin and findMax if "insert" is successfully implemented
-    cout << "(0) findMin = " << bst->findMin() << endl;
-    cout << "    findMax = " << bst->findMax() << endl;
+    //cout << "(0) findMin = " << bst->findMin() << endl;
+    //cout << "    findMax = " << bst->findMax() << endl;
 
     cout << "(1.1) Print BST (in-order traversal): " << endl << " ";
     bst->printInOrder();

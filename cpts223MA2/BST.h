@@ -53,6 +53,11 @@ private:
 	void insert( Comparable && x, BinaryNode * & t );
 	bool contains( const Comparable & x, BinaryNode *t ) const;
 	void remove( const Comparable & x, BinaryNode * & t );
+	int treeCounter(BinaryNode * t ) const;
+	int heightDeterminer(BinaryNode * t) const;
+	void inOrderPrinter(BinaryNode * t) const;
+	void printTheLevel(BinaryNode * t, int levelNo) const;
+	void maxPathPrintHelper(BinaryNode * t) const;
 
 };
 
@@ -193,33 +198,87 @@ void BST<Comparable>::remove( const Comparable & x, BinaryNode *&t) {
 // public treeSize
 template <typename Comparable>
 int BST<Comparable>::treeSize() const {
-	cout << "**TODO**: treeSize function" << endl;
-	return 0;
+	return treeCounter(root);
+}
+
+//private treeSize (I called it treeCounter)
+template <typename Comparable>
+int BST<Comparable>::treeCounter(BinaryNode * t ) const {
+	if (t==nullptr) return 0;
+	else return 1+treeCounter(t->left)+treeCounter(t->right);
 }
 
 // public treeHeight
 template <typename Comparable>
 int BST<Comparable>::treeHeight() const {
-	cout << "**TODO**: treeHeight function" << endl;
-	return 0;
+	return heightDeterminer(root);
+}
+
+//private treeHeight (I called it heightDeterminer)
+template <typename Comparable>
+int BST<Comparable>::heightDeterminer(BinaryNode * t ) const {
+	if (t==nullptr) return 0;
+	int leftHeight = heightDeterminer(t->left);
+	int rightHeight = heightDeterminer(t->right);
+	return (leftHeight > rightHeight) ? leftHeight+1 : rightHeight+1;
 }
 
 // public printInOrder: refer to textbook, Figure 4.60
 template<typename Comparable>
 void BST<Comparable>::printInOrder() const {
-	cout << "**TODO**: printInOrder function" << endl;
+	if (treeHeight()==0) cout <<"Empty tree"<<endl;
+	else inOrderPrinter(root);
+}
+
+//private printInOrder (I called it inOrderPrinter)
+template <typename Comparable>
+void BST<Comparable>::inOrderPrinter(BinaryNode * t) const {
+	if (t != nullptr) {
+		inOrderPrinter(t->left);
+		cout << t->element <<endl;
+		inOrderPrinter(t->right);
+	}
 }
 
 // public printLevels
 template <typename Comparable>
 void BST<Comparable>::printLevels() const {
-	cout << "**TODO**: printLevels function" << endl;
+	for (int i=1;i<=treeHeight();i++) {
+		cout<<"Level "<<i<<": ";
+		printTheLevel(root,i);
+		cout<<endl;
+	}
+}
+
+//private printLevels (I called it printTheLevel)
+template <typename Comparable>
+void BST<Comparable>::printTheLevel(BinaryNode * t, int levelNo) const {
+	if (t==nullptr) return;
+
+	if (levelNo==1) cout <<  t->element<< " ";
+	else {
+		printTheLevel(t->left,levelNo-1);
+		printTheLevel(t->right,levelNo-1);
+	}
 }
 
 // public printMaxPath
 template <typename Comparable>
 void BST<Comparable>::printMaxPath() const {
-	cout << "**TODO**: printMaxPath function" << endl;
+	if (treeHeight()!=0) maxPathPrintHelper(root);
+	else cout<<"Empty Tree"<<endl;
+}
+
+//private printMaxPath (named )
+template <typename Comparable>
+void BST<Comparable>::maxPathPrintHelper(BinaryNode * t) const {
+	cout << t->element<<endl;
+	int leftHeight=treeCounter(t->left);
+	int rightHeight=treeCounter(t->right);
+
+	if (leftHeight > rightHeight && leftHeight!=0) maxPathPrintHelper(t->left); // since the subtree's leftheight is greater,
+	else if (rightHeight!=0) maxPathPrintHelper(t->right);   					// that path must also be longer
+	else return;
 }
 
 #endif
