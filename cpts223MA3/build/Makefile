@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /workspaces/CPTS223_assignments/cpts223MA2
+CMAKE_SOURCE_DIR = /workspaces/CPTS223_assignments/cpts223MA3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /workspaces/CPTS223_assignments/cpts223MA2/build
+CMAKE_BINARY_DIR = /workspaces/CPTS223_assignments/cpts223MA3/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/CPTS223_assignments/cpts223MA2/build/CMakeFiles /workspaces/CPTS223_assignments/cpts223MA2/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/CPTS223_assignments/cpts223MA3/build/CMakeFiles /workspaces/CPTS223_assignments/cpts223MA3/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/CPTS223_assignments/cpts223MA2/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/CPTS223_assignments/cpts223MA3/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named MA2
+# Target rules for targets named MA3
 
 # Build rule for target.
-MA2: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 MA2
-.PHONY : MA2
+MA3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 MA3
+.PHONY : MA3
 
 # fast build rule for target.
-MA2/fast:
-	$(MAKE) -f CMakeFiles/MA2.dir/build.make CMakeFiles/MA2.dir/build
-.PHONY : MA2/fast
+MA3/fast:
+	$(MAKE) -f CMakeFiles/MA3.dir/build.make CMakeFiles/MA3.dir/build
+.PHONY : MA3/fast
 
 main.o: main.cpp.o
 
@@ -129,7 +129,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/MA2.dir/build.make CMakeFiles/MA2.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/MA3.dir/build.make CMakeFiles/MA3.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -138,7 +138,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/MA2.dir/build.make CMakeFiles/MA2.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/MA3.dir/build.make CMakeFiles/MA3.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -147,7 +147,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/MA2.dir/build.make CMakeFiles/MA2.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/MA3.dir/build.make CMakeFiles/MA3.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -158,7 +158,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... MA2"
+	@echo "... MA3"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
