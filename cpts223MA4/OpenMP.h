@@ -59,7 +59,12 @@ void calSum()
     omp_set_num_threads(num_threads);
 #pragma omp parallel
     {
-        // TODO
+        int tid=omp_get_thread_num();
+        int localSum=0;
+        for (int i=tid*workload;i<(tid+1)*workload;i++) localSum+=data[i];
+        //atomic schronization
+        #pragma omp atomic
+        sum+=localSum;
     }
     // -------------- above TODO: OpenMP implementation --------------
 
@@ -101,7 +106,16 @@ void calMax()
     omp_set_num_threads(num_threads);
 #pragma omp parallel
     {
-        // TODO
+        int tid=omp_get_thread_num();
+        int localMax=-1;
+        for (int i=tid*workload;i<(tid+1)*workload;i++) {
+            if (data[i]>localMax) localMax = data[i];
+        }
+        //critical schronization
+        #pragma omp critical 
+        {
+            if (localMax>max) max=localMax;
+        }
     }
     // -------------- above TODO: OpenMP implementation --------------
 
