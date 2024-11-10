@@ -30,11 +30,22 @@ private:
 	 *  Percolates the item specified at by index down 
      *   into its proper location within a heap.
 	 *  Used for dequeue operations and array to heap conversions
-	 *  TODO: Implement percolateDown
+	 *  TODO: Implement percolateDown`
 	 */
 	void percolateDown(unsigned int hole)
 	{
-		// TODO
+		unsigned int child;
+		T temp = std::move(_items[hole]);
+
+		for (;hole*2<_items.size();hole=child) {
+			child = hole*2;
+			if (child != _items.size() && _items[child+1]<_items[child]) child++;
+
+			if (_items[child]<temp) _items[hole]=std::move(_items[child]);
+			else break;
+		}
+
+		_items[hole]=std::move(temp);
 	}
 
 	/**
@@ -44,7 +55,13 @@ private:
 	 */
 	void percolateUp(T item)
 	{
-		// TODO
+		int hole = _items.size();
+		_items.push_back(item);
+		T extra = item;
+
+		_items[0]=std::move(extra);
+		for (;item<_items[hole/2];hole /= 2) _items[hole]=std::move(_items[hole/2]);
+		_items[hole]=std::move(_items[0]);
 	}
 
 	/********************** End Microassigment zone *********************/
