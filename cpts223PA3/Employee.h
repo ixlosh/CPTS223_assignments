@@ -32,7 +32,7 @@ private:
 
 
 template<>
-class hash<Employee> 
+class std::hash<Employee> 
 {
 public:
     size_t operator()( const Employee &item )

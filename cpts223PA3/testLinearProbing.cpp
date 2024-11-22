@@ -23,7 +23,7 @@ void searchEachEntryOnce(vector<Employee> aVector, ProbingHash<Employee> & aHash
     {
         if (aHashTable.contains(element) == 0)
         {
-            // cout << "ERROR!" << endl;
+            // std::cout << "ERROR!" << std::endl;
         }    
     }
 }

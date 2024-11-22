@@ -26,7 +26,7 @@ void testProbingHash()
 int main()
 {
     testChainingHash();
-    cout << endl;
+    std::cout << std::endl;
     testProbingHash();
 
     return 0;

@@ -21,33 +21,50 @@ class ChainingHash
 
     bool contains( const HashedObj & x ) const
     {
-        // TODO: refer to Figure 5.9 in textbook
-        return false;
+        auto & whichList = theLists[myhash(x)];
+        return find(begin(whichList), end(whichList),x) != end(whichList);
     }
 
     void makeEmpty( )
     {
-        // TODO: refer to Figure 5.9 in textbook
+        for( auto & thisList : theLists) thisList.clear();
     }
 
     bool insert( const HashedObj & x )
     {
-        // TODO: refer to Figure 5.10 in textbook
-        // this "insert" function accepts Lvalues
-        return false;
+        auto & whichList = theLists[myhash(x)];
+        if(find(begin(whichList), end(whichList),x) != end(whichList)) return false;
+        whichList.push_back(x);
+
+        // Rehashing
+        if (++currentSize>theLists.size()) rehash();
+
+        return true;
     }
     
     bool insert( HashedObj && x )
     {
-        // TODO: this "insert" function accepts *Rvalues*
-        // so needs to use "move" (slightly different from the above one)
-        return false;
+        auto & whichList = theLists[myhash(x)];
+        if(find(begin(whichList), end(whichList),x) != end(whichList)) return false;
+        whichList.push_back(std::move(x));
+
+        // Rehashing
+        if (++currentSize>theLists.size()) rehash();
+
+        return true;
     }
 
     bool remove( const HashedObj & x )
     {
-        // TODO: refer to Figure 5.9 in textbook
-        return false;
+        auto & whichList = theLists[myhash(x)];
+        auto itr = find(begin(whichList), end(whichList),x);
+
+        if (itr == end(whichList)) return false;
+
+        whichList.erase(itr);
+        currentSize -= 1;
+
+        return true;
     }
 
     double readLoadFactor() 
@@ -71,7 +88,14 @@ class ChainingHash
 
     void rehash( )
     {
-        // TODO: refer to Figure 5.22 in textbook
+        vector<list<HashedObj>> oldLists = theLists;
+        theLists.resize(nextPrime(2*theLists.size()));
+        for(auto & thisList : theLists) thisList.clear();
+
+        currentSize=0;
+        for(auto & thisList : oldLists) {
+            for(auto & x : thisList) insert (std::move(x));
+        }
     }
 
     size_t myhash( const HashedObj & x ) const
@@ -82,8 +106,7 @@ class ChainingHash
 
     double loadFactor()
     {
-        // TODO: compute the load factor of hash table, defined on Page 198 of textbook
-        return 0.0;
+        return (double)currentSize/(double)theLists.size();
     }
 };
 
