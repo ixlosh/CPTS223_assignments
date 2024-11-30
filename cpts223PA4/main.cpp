@@ -24,7 +24,8 @@ public:
 
     // merge sort
     void mergeSort(std::vector<int>& arr, int left, int right) {
-        // TODO
+        std::vector<int> tempArr(arr.size());
+        mergeSort(arr,tempArr,left,right);
     }
 
     // generate random integers
@@ -88,6 +89,31 @@ public:
 
 private:
     // Some internal helper functions
+    void mergeSort(std::vector<int>& arr,std::vector<int>& tempArr, int left, int right){
+        if (left<right) {
+            int center =(left+right)/2;
+            mergeSort(arr,tempArr,left,center);
+            mergeSort(arr,tempArr,center+1,right);
+            merge(arr,tempArr,left,center+1,right);
+        }
+    }
+
+    void merge(std::vector<int>& arr,std::vector<int>& tempArr, int leftPos, int rightPos, int finish2) {
+        int finish1=rightPos-1;
+        int tempPos=leftPos;
+        int noElemenets=finish2-leftPos+1;
+
+        while(leftPos<=finish1&&rightPos<=finish2) {
+            if(arr[leftPos]<=arr[rightPos]) tempArr[tempPos++]=std::move(arr[leftPos++]);
+            else tempArr[tempPos++]=std::move(arr[rightPos++]);
+        }
+
+        // following 2 while loops complete the tempArr if any are left in the left or right arrays
+        while (leftPos<=finish1) tempArr[tempPos++]=std::move(arr[leftPos++]);
+        while (rightPos<=finish2) tempArr[tempPos++]=std::move(arr[rightPos++]);
+
+        for (int i=0;i<noElemenets;i++,finish2--) arr[finish2]=std::move(tempArr[finish2]);
+    }
 };
 
 int main() {
