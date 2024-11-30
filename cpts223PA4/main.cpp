@@ -17,9 +17,26 @@ public:
         }
     }
 
-    // quick sort
+    // quick sort -> With the given function definition, we can skip the driver function
+    // and go directly into main private helper functions
     void quickSort(std::vector<int>& arr, int left, int right) {
-        // TODO
+        // after the unsorted size drops below the cutoff, switch sorting
+        // methods to preserve efficiency
+        if (left+10<=right){
+            const int & pivot= median3(arr,left,right);
+            int i=left,m=right-1;
+            for(;;) {
+                while(arr[++i]<pivot) {}
+                while (pivot<arr[--m]) {}
+                if (i<m) std::swap(arr[i],arr[m]);
+                else break;
+            }
+            std::swap(arr[i],arr[right-1]);
+
+            quickSort(arr,left,i-1);
+            quickSort(arr,i+1,right);
+        }
+        else insertionSort(arr);
     }
 
     // merge sort
@@ -113,6 +130,16 @@ private:
         while (rightPos<=finish2) tempArr[tempPos++]=std::move(arr[rightPos++]);
 
         for (int i=0;i<noElemenets;i++,finish2--) arr[finish2]=std::move(tempArr[finish2]);
+    }
+
+    const int & median3(std::vector<int>& arr,int left,int right) {
+        int center = (left+right)/2;
+        if (arr[center<arr[left]]) std::swap(arr[left],arr[center]);
+        if(arr[right]<arr[left]) std::swap(arr[left],arr[right]);
+        if(arr[right]<arr[center]) std::swap(arr[right],arr[center]);
+
+        std::swap(arr[center],arr[right-1]);
+        return arr[right-1];
     }
 };
 
