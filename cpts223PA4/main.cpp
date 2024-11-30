@@ -7,7 +7,14 @@ class SortingComparison {
 public:
     // insrtion sort
     void insertionSort(std::vector<int>& arr) {
-        // TODO
+        for (int i=1;i<(int)arr.size(); i++) {
+            int hold=std::move(arr[i]);
+            int m=0;
+            for (m=i;m>0&&hold<arr[m-1];m--) {
+                arr[m]=std::move(arr[m-1]);
+            }
+            arr[m]=std::move(hold);
+        }
     }
 
     // quick sort
