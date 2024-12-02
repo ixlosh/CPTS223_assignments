@@ -13,7 +13,11 @@ DisjointSets::DisjointSets( int numElements ) : s( numElements, -1 )
  */
 void DisjointSets::unionSets( int root1, int root2 )
 {
-    // TODO
+    if(s[root2]<s[root1]) s[root1]=s[root2];
+    else {
+        if(s[root1]==s[root2]) s[root1]--;
+        s[root2]=root1;
+    }
 }
 
 
@@ -23,8 +27,8 @@ void DisjointSets::unionSets( int root1, int root2 )
  */
 int DisjointSets::find( int x ) const
 {
-    // TODO
-    return s[0];
+    if (s[x]<0) return x;
+    else return find(s[x]);
 }
 
 
@@ -34,6 +38,6 @@ int DisjointSets::find( int x ) const
  */
 int DisjointSets::find( int x )
 {
-    // TODO
-    return s[0];
+    if (s[x]<0) return x;
+    else return s[x]=find(s[x]);
 }

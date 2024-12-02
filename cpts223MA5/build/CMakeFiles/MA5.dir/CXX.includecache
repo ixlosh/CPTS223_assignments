@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/workspaces/CPTS223_assignments/cpts223MA5/DisjointSets.cpp
+DisjointSets.h
+/workspaces/CPTS223_assignments/cpts223MA5/DisjointSets.h
+
+/workspaces/CPTS223_assignments/cpts223MA5/DisjointSets.h
+vector
+-
+
+/workspaces/CPTS223_assignments/cpts223MA5/main.cpp
+iostream
+-
+DisjointSets.h
+/workspaces/CPTS223_assignments/cpts223MA5/DisjointSets.h
+
