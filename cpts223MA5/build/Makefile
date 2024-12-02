@@ -48,24 +48,13 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /workspaces/CPTS223_assignments/cpts223MA3
+CMAKE_SOURCE_DIR = /workspaces/CPTS223_assignments/cpts223MA5
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /workspaces/CPTS223_assignments/cpts223MA3/build
+CMAKE_BINARY_DIR = /workspaces/CPTS223_assignments/cpts223MA5/build
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -78,11 +67,22 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/CPTS223_assignments/cpts223MA3/build/CMakeFiles /workspaces/CPTS223_assignments/cpts223MA3/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/CPTS223_assignments/cpts223MA5/build/CMakeFiles /workspaces/CPTS223_assignments/cpts223MA5/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/CPTS223_assignments/cpts223MA3/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/CPTS223_assignments/cpts223MA5/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named MA3
+# Target rules for targets named MA5
 
 # Build rule for target.
-MA3: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 MA3
-.PHONY : MA3
+MA5: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 MA5
+.PHONY : MA5
 
 # fast build rule for target.
-MA3/fast:
-	$(MAKE) -f CMakeFiles/MA3.dir/build.make CMakeFiles/MA3.dir/build
-.PHONY : MA3/fast
+MA5/fast:
+	$(MAKE) -f CMakeFiles/MA5.dir/build.make CMakeFiles/MA5.dir/build
+.PHONY : MA5/fast
+
+DisjointSets.o: DisjointSets.cpp.o
+
+.PHONY : DisjointSets.o
+
+# target to build an object file
+DisjointSets.cpp.o:
+	$(MAKE) -f CMakeFiles/MA5.dir/build.make CMakeFiles/MA5.dir/DisjointSets.cpp.o
+.PHONY : DisjointSets.cpp.o
+
+DisjointSets.i: DisjointSets.cpp.i
+
+.PHONY : DisjointSets.i
+
+# target to preprocess a source file
+DisjointSets.cpp.i:
+	$(MAKE) -f CMakeFiles/MA5.dir/build.make CMakeFiles/MA5.dir/DisjointSets.cpp.i
+.PHONY : DisjointSets.cpp.i
+
+DisjointSets.s: DisjointSets.cpp.s
+
+.PHONY : DisjointSets.s
+
+# target to generate assembly for a file
+DisjointSets.cpp.s:
+	$(MAKE) -f CMakeFiles/MA5.dir/build.make CMakeFiles/MA5.dir/DisjointSets.cpp.s
+.PHONY : DisjointSets.cpp.s
 
 main.o: main.cpp.o
 
@@ -129,7 +156,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/MA3.dir/build.make CMakeFiles/MA3.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/MA5.dir/build.make CMakeFiles/MA5.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -138,7 +165,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/MA3.dir/build.make CMakeFiles/MA3.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/MA5.dir/build.make CMakeFiles/MA5.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -147,7 +174,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/MA3.dir/build.make CMakeFiles/MA3.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/MA5.dir/build.make CMakeFiles/MA5.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -156,9 +183,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... MA3"
+	@echo "... rebuild_cache"
+	@echo "... MA5"
+	@echo "... DisjointSets.o"
+	@echo "... DisjointSets.i"
+	@echo "... DisjointSets.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

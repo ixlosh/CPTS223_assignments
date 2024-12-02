@@ -4,7 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/workspaces/CPTS223_assignments/cpts223MA3/main.cpp" "/workspaces/CPTS223_assignments/cpts223MA3/build/CMakeFiles/MA3.dir/main.cpp.o"
+  "/workspaces/CPTS223_assignments/cpts223MA5/DisjointSets.cpp" "/workspaces/CPTS223_assignments/cpts223MA5/build/CMakeFiles/MA5.dir/DisjointSets.cpp.o"
+  "/workspaces/CPTS223_assignments/cpts223MA5/main.cpp" "/workspaces/CPTS223_assignments/cpts223MA5/build/CMakeFiles/MA5.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
